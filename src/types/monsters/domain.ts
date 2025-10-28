@@ -4,3 +4,36 @@ export type MonsterState = typeof MONSTER_STATES[number]
 
 export const DEFAULT_MONSTER_LEVEL = 1
 export const DEFAULT_MONSTER_STATE: MonsterState = 'hungry'
+
+// Pixel Monster Types (from GitHub v0-tamagotcho)
+export type MonsterStyle = 'round' | 'square' | 'tall' | 'wide'
+export type EyeStyle = 'big' | 'small' | 'star' | 'sleepy'
+export type AntennaStyle = 'single' | 'double' | 'curly' | 'none'
+export type AccessoryStyle = 'horns' | 'ears' | 'tail' | 'none'
+
+export interface MonsterTraits {
+  bodyColor: string
+  accentColor: string
+  eyeColor: string
+  antennaColor: string
+  bobbleColor: string
+  cheekColor: string
+  bodyStyle: MonsterStyle
+  eyeStyle: EyeStyle
+  antennaStyle: AntennaStyle
+  accessory: AccessoryStyle
+}
+
+// Database Monster type (serialized version)
+export interface DBMonster {
+  _id: string
+  name: string
+  level: number | null
+  xp?: number
+  maxXp?: number
+  traits: string // JSON stringified MonsterTraits
+  state: MonsterState | string | null
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}

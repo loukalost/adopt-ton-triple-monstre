@@ -1,19 +1,29 @@
 function getSize (size: 'sm' | 'md' | 'lg' | 'xl'): string {
   switch (size) {
-    case 'sm': return 'px-2 py-1 text-sm'
-    case 'md': return 'px-4 py-2 text-md'
-    case 'lg': return 'px-6 py-3 text-lg'
-    case 'xl': return 'px-8 py-4 text-xl'
+    case 'sm': return 'px-3 py-1.5 text-sm font-medium'
+    case 'md': return 'px-4 py-2.5 text-base font-medium'
+    case 'lg': return 'px-6 py-3 text-lg font-semibold'
+    case 'xl': return 'px-8 py-4 text-xl font-semibold'
   }
 }
 
 function getVariant (variant: 'primary' | 'secondary' | 'ghost' | 'underline' | 'outline', disabled = false): string {
+  if (disabled) {
+    switch (variant) {
+      case 'primary': return 'bg-slate-300 text-slate-500 cursor-not-allowed'
+      case 'secondary': return 'bg-slate-200 text-slate-400 cursor-not-allowed'
+      case 'ghost': return 'bg-transparent text-slate-400 cursor-not-allowed'
+      case 'underline': return 'bg-transparent text-slate-400 underline underline-offset-4 cursor-not-allowed'
+      case 'outline': return 'bg-transparent text-slate-400 border-2 border-slate-300 cursor-not-allowed'
+    }
+  }
+
   switch (variant) {
-    case 'primary': return disabled ? 'bg-royal-blue-800 text-royal-blue-50' : 'bg-royal-blue-950 text-royal-blue-50'
-    case 'secondary': return disabled ? 'bg-black-950 text-black-50' : 'bg-black-950 text-black-50'
-    case 'ghost': return disabled ? 'bg-black-950 text-black-50' : 'bg-black-950 text-black-50'
-    case 'underline': return disabled ? 'bg-transparent text-black-950 underline-offset-4 underline-2' : 'bg-transparent text-black-950 underline-offset-4 underline-2'
-    case 'outline': return disabled ? 'bg-transparent text-black-950 outline-2 outline-offset-2' : 'bg-transparent text-black-950 outline-2 outline-offset-2'
+    case 'primary': return 'bg-slate-900 text-white hover:bg-slate-800 active:bg-slate-950 shadow-sm hover:shadow-md'
+    case 'secondary': return 'bg-slate-100 text-slate-900 hover:bg-slate-200 active:bg-slate-300 border border-slate-300'
+    case 'ghost': return 'bg-transparent text-slate-700 hover:bg-slate-100 hover:text-slate-900 active:bg-slate-200'
+    case 'underline': return 'bg-transparent text-slate-900 underline underline-offset-4 hover:text-slate-700 decoration-2'
+    case 'outline': return 'bg-transparent text-slate-900 border-2 border-slate-900 hover:bg-slate-900 hover:text-white active:bg-slate-950'
   }
 }
 
@@ -34,8 +44,9 @@ function Button ({
 }): React.ReactNode {
   return (
     <button
-      className={`rounded-md ${disabled ? '' : 'transition-all duration-300 cursor-pointer'} ${getSize(size)} ${getVariant(variant)} ${disabled ? 'opacity-50' : ''}`}
+      className={`rounded-lg ${!disabled ? 'transition-all duration-200 cursor-pointer' : ''} ${getSize(size)} ${getVariant(variant, disabled)}`}
       onClick={onClick}
+      disabled={disabled}
       type={type}
     >
       {children}

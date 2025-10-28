@@ -4,7 +4,15 @@ export {
   MONSTER_STATES
 } from './monsters/domain'
 
-export type { MonsterState } from './monsters/domain'
+export type {
+  MonsterState,
+  MonsterStyle,
+  EyeStyle,
+  AntennaStyle,
+  AccessoryStyle,
+  MonsterTraits,
+  DBMonster
+} from './monsters/domain'
 
 export type {
   MonsterCreationPayload,

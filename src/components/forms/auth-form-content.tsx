@@ -13,10 +13,10 @@ function AuthFormContent (): React.ReactNode {
     <div className='space-y-6'>
       {/* Error display */}
       {(error.length > 0) && (
-        <div className='bg-red-50 border-l-4 border-red-400 p-4 rounded-r-xl animate-pulse'>
-          <div className='flex items-center'>
-            <span className='text-red-400 mr-2'>⚠️</span>
-            <p className='text-red-700 text-sm font-medium'>{error}</p>
+        <div className='bg-red-50 border border-red-200 p-4 rounded-lg'>
+          <div className='flex items-center gap-2'>
+            <span className='text-red-600 text-lg'>⚠️</span>
+            <p className='text-red-800 text-sm font-medium'>{error}</p>
           </div>
         </div>
       )}
@@ -37,7 +37,7 @@ function AuthFormContent (): React.ReactNode {
       </div>
 
       {/* Toggle button */}
-      <div className='text-center pt-4 border-t border-gray-200'>
+      <div className='text-center pt-4 border-t border-slate-200'>
         <Button
           type='button'
           variant='ghost'

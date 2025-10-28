@@ -63,7 +63,7 @@ const catPattern: PixelSequence = [
   [22, 29, black], [23, 29, black], [24, 29, black], [25, 29, black],
   [22, 30, black], [23, 30, darkGray], [24, 30, darkGray], [25, 30, black],
   [22, 31, black], [23, 31, black], [24, 31, black], [25, 31, black],
-  [22, 32, black], [23, 32, gray], [24, 32, gray], [25, 32, black],
+  [22, 32, black], [23, 32, gray],
   [13, 27, black], [18, 27, black], [19, 27, black], [20, 27, black], [21, 27, black], [26, 27, black],
   [12, 28, black], [13, 28, black], [18, 28, black], [19, 28, darkGray], [20, 28, darkGray], [21, 28, black], [26, 28, black], [27, 28, black],
   [12, 29, black], [13, 29, darkGray], [18, 29, black], [19, 29, black], [20, 29, black], [21, 29, black], [26, 29, darkGray], [27, 29, black],

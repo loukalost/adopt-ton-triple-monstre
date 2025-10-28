@@ -50,10 +50,10 @@ function SignUpForm ({ onError }: { onError: (error: string) => void }): React.R
   return (
     <div className='space-y-6'>
       <div className='text-center'>
-        <h2 className='text-2xl font-bold text-gray-800 mb-2'>
+        <h2 className='text-2xl font-bold text-slate-900 mb-2'>
           🆕 Créer un compte
         </h2>
-        <p className='text-gray-600 text-sm'>
+        <p className='text-slate-600 text-sm'>
           Rejoignez l'aventure Adopt ton triple monstre ! 🎆
         </p>
       </div>
