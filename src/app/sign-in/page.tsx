@@ -1,8 +1,8 @@
 import AuthFormContent from '@/components/forms/auth-form-content'
-import { connectToDatabase } from '@/db'
+import connectDB from '@/db'
 
 async function SignInPage (): Promise<React.ReactNode> {
-  await connectToDatabase()
+  await connectDB()
   return (
     <div className='min-h-screen bg-gradient-to-br from-moccaccino-50 via-fuchsia-blue-50 to-lochinvar-50 flex items-center justify-center p-4 relative overflow-hidden'>
       {/* Animated floating monsters */}

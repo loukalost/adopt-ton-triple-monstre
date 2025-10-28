@@ -9,7 +9,7 @@ export interface BenefitCardProps {
   icon: string
   title: string
   description: string
-  colorTheme: 'royal-blue' | 'perfume' | 'black'
+  colorTheme: 'moccaccino' | 'lochinvar' | 'fuchsia-blue'
 }
 
 export interface MonsterCardProps {
@@ -22,7 +22,7 @@ export interface ActionCardProps {
   icon: string
   title: string
   description: string
-  colorTheme: 'royal-blue' | 'perfume' | 'black'
+  colorTheme: 'moccaccino' | 'lochinvar' | 'fuchsia-blue'
 }
 
 export interface FooterLinkGroup {

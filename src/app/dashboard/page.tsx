@@ -1,9 +1,10 @@
 import DashboardContent from '@/components/dashboard/dashboard-content'
-import { auth } from '@/lib/auth'
+import { getAuthInstance } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 async function DashboardPage (): Promise<React.ReactNode> {
+  const auth = await getAuthInstance()
   const session = await auth.api.getSession({
     headers: await headers()
   })

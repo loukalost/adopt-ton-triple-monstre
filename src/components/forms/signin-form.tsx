@@ -2,6 +2,7 @@ import { useState } from 'react'
 import InputField from '../inputs/input'
 import Button from '../buttons/button'
 import { authClient } from '@/lib/auth-client'
+import { authToasts } from '@/lib/toast'
 
 interface Credentials {
   email: string
@@ -30,12 +31,14 @@ function SignInForm ({ onError }: { onError: (error: string) => void }): React.R
       },
       onSuccess: (ctx) => {
         console.log('User signed in:', ctx)
+        authToasts.signInSuccess()
         setIsLoading(false)
       },
       onError: (ctx) => {
         console.error('Sign in error:', ctx)
         setIsLoading(false)
         onError(ctx.error.message)
+        authToasts.signInError()
       }
     })
   }

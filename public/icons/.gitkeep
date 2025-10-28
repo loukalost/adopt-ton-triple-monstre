@@ -1,0 +1,45 @@
+# Icônes PWA Manquantes
+
+⚠️ **Action Requise**: Les icônes PWA doivent être générées pour activer pleinement la fonctionnalité PWA.
+
+## Génération Rapide
+
+Pour générer toutes les icônes depuis le logo existant :
+
+```powershell
+# Installer Sharp (si pas déjà installé)
+npm install --save-dev sharp
+
+# Générer les icônes
+node scripts/generate-icons.js public/logo.png
+```
+
+## Icônes Manquantes
+
+Les fichiers suivants doivent être présents dans ce dossier :
+
+### Minimum Requis (PWA valide)
+- [ ] icon-192x192.png
+- [ ] icon-512x512.png
+
+### Recommandé (Expérience Complète)
+- [ ] icon-72x72.png
+- [ ] icon-96x96.png
+- [ ] icon-128x128.png
+- [ ] icon-144x144.png
+- [ ] icon-152x152.png
+- [ ] icon-180x180.png
+- [ ] icon-384x384.png
+- [ ] icon-maskable-192x192.png
+- [ ] icon-maskable-512x512.png
+- [ ] icon-70x70.png (Windows)
+- [ ] icon-150x150.png (Windows)
+- [ ] icon-310x310.png (Windows)
+- [ ] icon-310x150.png (Windows)
+- [ ] shortcut-create.png
+- [ ] shortcut-monsters.png
+- [ ] safari-pinned-tab.svg
+
+## Documentation Complète
+
+Consultez `docs/PWA_ICONS_GENERATION.md` pour les instructions détaillées et alternatives de génération.
