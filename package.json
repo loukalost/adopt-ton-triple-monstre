@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "npm run copy-docs && next build --turbopack",
     "start": "next start",
-    "lint": "ts-standard --fix"
+    "lint": "ts-standard --fix",
+    "copy-docs": "node scripts/copy-docs.mjs",
+    "docs:build": "cd documentation && npm run build",
+    "docs:dev": "cd documentation && npm run start"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^5.3.0",

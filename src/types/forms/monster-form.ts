@@ -1,4 +1,4 @@
-import type { MonsterState } from '@/types/monsters/domain'
+import type { MonsterState } from '@/types/monster'
 
 export interface MonsterFormValues {
   name: string

@@ -2,14 +2,14 @@
 import React, { useState } from 'react'
 import InputField from '@/components/inputs/input'
 import Button from '@/components/buttons/button'
-import PixelBlackCat, { type PixelBlackCatState } from '@/components/monsters/black-cat'
-import MonsterTraitsDisplay from '@/components/monsters/monster-traits-display'
+import { PixelMonster } from '@/components/monsters/pixel-monster'
 import {
   DEFAULT_MONSTER_LEVEL,
   DEFAULT_MONSTER_STATE,
   MONSTER_STATES,
-  type MonsterState
-} from '@/types/monsters/domain'
+  type MonsterState,
+  type MonsterTraits
+} from '@/types/monster'
 import {
   type MonsterCreationPayload,
   type MonsterFormErrors,
@@ -17,11 +17,7 @@ import {
   type MonsterFormValues
 } from '@/types/forms/monster-form'
 import { validateMonsterFormValues } from '@/services/monsters/validation'
-import {
-  generateUniqueMonsterTraits,
-  serializeTraits,
-  type MonsterTraits
-} from '@/services/monster-generator.service'
+import { generateRandomTraits } from '@/services/monster-generator.service'
 import { monsterToasts, showError, showWarning } from '@/lib/toast'
 
 async function defaultSubmit (payload: MonsterCreationPayload): Promise<void> {
@@ -36,14 +32,6 @@ async function defaultSubmit (payload: MonsterCreationPayload): Promise<void> {
   }
 }
 
-const STATE_TO_PIXEL_STATE: Record<MonsterState, PixelBlackCatState> = {
-  happy: 'happy',
-  sad: 'idle',
-  angry: 'idle',
-  hungry: 'idle',
-  sleepy: 'sleep'
-}
-
 function MonsterForm ({ onSubmit, onSuccess }: MonsterFormProps): React.ReactNode {
   const [values, setValues] = useState<MonsterFormValues>({
     name: '',
@@ -54,7 +42,7 @@ function MonsterForm ({ onSubmit, onSuccess }: MonsterFormProps): React.ReactNod
   const [generalError, setGeneralError] = useState<string>('')
   const [generatedMonsterState, setGeneratedMonsterState] = useState<MonsterState | null>(null)
   const [generatedTraits, setGeneratedTraits] = useState<MonsterTraits | null>(null)
-  const [previewState, setPreviewState] = useState<PixelBlackCatState>('idle')
+  const [previewState, setPreviewState] = useState<MonsterState>('happy')
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
@@ -63,16 +51,16 @@ function MonsterForm ({ onSubmit, onSuccess }: MonsterFormProps): React.ReactNod
 
   const handleGenerateMonster = (): void => {
     const nextMonsterState = MONSTER_STATES[Math.floor(Math.random() * MONSTER_STATES.length)]
-    const traits = generateUniqueMonsterTraits()
+    const traits = generateRandomTraits()
 
     setGeneratedMonsterState(nextMonsterState)
     setGeneratedTraits(traits)
-    setPreviewState(STATE_TO_PIXEL_STATE[nextMonsterState])
+    setPreviewState(nextMonsterState)
   }
 
   const handleStateSelection = (state: MonsterState): void => {
     setGeneratedMonsterState(state)
-    setPreviewState(STATE_TO_PIXEL_STATE[state])
+    setPreviewState(state)
   }
 
   const handleSubmit = async (): Promise<void> => {
@@ -102,7 +90,7 @@ function MonsterForm ({ onSubmit, onSuccess }: MonsterFormProps): React.ReactNod
         ...values,
         level: DEFAULT_MONSTER_LEVEL,
         state: generatedMonsterState ?? DEFAULT_MONSTER_STATE,
-        traits: serializeTraits(generatedTraits)
+        traits: JSON.stringify(generatedTraits)
       }
       await submission(payload)
 
@@ -113,7 +101,7 @@ function MonsterForm ({ onSubmit, onSuccess }: MonsterFormProps): React.ReactNod
       setErrors({})
       setGeneratedMonsterState(null)
       setGeneratedTraits(null)
-      setPreviewState('idle')
+      setPreviewState('happy')
       if (typeof onSuccess === 'function') onSuccess()
     } catch (error) {
       const errorMsg = (error as Error).message
@@ -146,58 +134,61 @@ function MonsterForm ({ onSubmit, onSuccess }: MonsterFormProps): React.ReactNod
         </div>
       )}
 
-      <div className='space-y-3 rounded-xl border border-purple-200/40 bg-purple-50/30 p-4'>
+      <div className='space-y-3 rounded-xl border border-moccaccino-200/40 bg-moccaccino-50/30 p-4'>
         <div className='space-y-1'>
-          <p className='font-semibold text-purple-900'>Apercu du monstre</p>
-          <p className='text-sm text-purple-700'>Utilise la génération pour obtenir un aperçu du Pixel Black Cat.</p>
+          <p className='font-semibold text-moccaccino-900'>Aperçu du monstre</p>
+          <p className='text-sm text-moccaccino-700'>Génère ton monstre et visualise-le dans différents états.</p>
         </div>
-        <div className='flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-between'>
-          <div className='w-full sm:max-w-xs'>
-            <Button type='button' variant='outline' onClick={handleGenerateMonster}>
-              Générer un monstre
-            </Button>
-            <div className='mt-4 grid grid-cols-2 gap-2'>
-              {MONSTER_STATES.map((state) => {
-                const isActive = generatedMonsterState === state
-                return (
-                  <button
-                    key={state}
-                    type='button'
-                    onClick={() => { handleStateSelection(state) }}
-                    disabled={submitting}
-                    className={`rounded-lg border border-purple-400/40 px-3 py-2 text-xs uppercase transition-colors duration-300 ${isActive ? 'bg-purple-600 text-white' : 'bg-white/40 text-purple-700 hover:bg-purple-100'}`}
-                  >
-                    {state}
-                  </button>
-                )
-              })}
+        <div className='flex flex-col items-center gap-4'>
+          <Button type='button' variant='outline' onClick={handleGenerateMonster}>
+            🎲 Générer un monstre aléatoire
+          </Button>
+
+          {generatedMonsterState !== null && generatedTraits !== null && (
+            <div className='w-full space-y-4'>
+              <div className='flex justify-center rounded-lg bg-slate-50 p-8'>
+                <PixelMonster
+                  traits={generatedTraits}
+                  state={previewState}
+                  level={1}
+                />
+              </div>
+
+              <div className='space-y-2'>
+                <p className='text-center text-xs font-semibold uppercase tracking-wider text-moccaccino-600'>
+                  Sélectionne un état
+                </p>
+                <div className='grid grid-cols-5 gap-2'>
+                  {MONSTER_STATES.map((state) => {
+                    const isActive = previewState === state
+                    return (
+                      <button
+                        key={state}
+                        type='button'
+                        onClick={() => { handleStateSelection(state) }}
+                        disabled={submitting}
+                        className={`rounded-lg border px-2 py-2 text-xs capitalize transition-all duration-300 ${isActive ? 'border-moccaccino-500 bg-moccaccino-500 text-white shadow-md scale-105' : 'border-moccaccino-200 bg-white text-moccaccino-700 hover:bg-moccaccino-100'}`}
+                      >
+                        {state}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
-          <div className='w-full sm:max-w-sm'>
-            {generatedMonsterState !== null && generatedTraits !== null
-              ? (
-                <div className='space-y-4'>
-                  <PixelBlackCat state={previewState} layout='compact' showControls={false} />
-                  <div className='rounded-lg bg-white/60 p-3'>
-                    <p className='mb-2 text-center font-mono text-xs uppercase tracking-[0.2em] text-purple-600'>
-                      État : {generatedMonsterState}
-                    </p>
-                    <MonsterTraitsDisplay traits={generatedTraits} variant='detailed' />
-                  </div>
-                </div>
-                )
-              : (
-                <div className='rounded-lg border border-dashed border-purple-300/60 bg-white/30 p-6 text-center text-sm text-purple-500'>
-                  Clique sur "Générer un monstre" pour découvrir ses caractéristiques.
-                </div>
-                )}
-          </div>
+          )}
+
+          {(generatedMonsterState === null || generatedTraits === null) && (
+            <div className='rounded-lg border border-dashed border-moccaccino-300 bg-white/50 p-8 text-center text-sm text-moccaccino-500'>
+              🎨 Clique sur le bouton pour générer ton monstre unique !
+            </div>
+          )}
         </div>
       </div>
 
       <div className='flex justify-end gap-3'>
         <Button type='submit' variant='primary' disabled={submitting}>
-          {submitting ? 'Création en cours...' : 'Créer la créature'}
+          {submitting ? '⏳ Création en cours...' : '✨ Créer la créature'}
         </Button>
       </div>
     </form>
