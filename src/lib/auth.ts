@@ -32,7 +32,7 @@ async function getAuthInstance (): Promise<ReturnType<typeof betterAuth>> {
       updateAge: 60 * 60 * 24 // 1 day
     },
     advanced: {
-      cookiePrefix: 'tamagotcho'
+      cookiePrefix: 'adopt-ton-triple-monstre'
     }
   })
 
@@ -58,7 +58,7 @@ export const authConfig: BetterAuthOptions = {
     updateAge: 60 * 60 * 24
   },
   advanced: {
-    cookiePrefix: 'tamagotcho'
+    cookiePrefix: 'adopt-ton-triple-monstre'
   }
 }
 

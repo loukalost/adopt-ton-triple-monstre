@@ -1,4 +1,5 @@
 import DashboardContent from '@/components/dashboard/dashboard-content'
+import { AppLayout } from '@/components/navigation'
 import { getAuthInstance } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -14,7 +15,9 @@ async function DashboardPage (): Promise<React.ReactNode> {
   }
 
   return (
-    <DashboardContent session={session} />
+    <AppLayout>
+      <DashboardContent session={session} />
+    </AppLayout>
   )
 }
 

@@ -1,12 +1,9 @@
 import Stripe from 'stripe'
 
+/**
+ * Instance Stripe configurée avec la clé secrète
+ */
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  typescript: true
+  typescript: true,
+  apiVersion: '2025-09-30.clover'
 })
-
-export const pricingTable = {
-  10: 'prod_TJrIJITcL4IHs3',
-  50: 'prod_TJrJcuzsBuRDse',
-  500: 'prod_TJrJvU3OyU8HoJ',
-  1000: 'prod_TJrK272JmJ5tGA'
-}

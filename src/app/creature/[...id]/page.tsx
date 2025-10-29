@@ -1,5 +1,6 @@
 import { getMonsterById } from '@/actions/monsters.actions'
 import ErrorClient from '@/components/error-client'
+import { AppLayout } from '@/components/navigation'
 
 async function CreaturePage ({ params }: { params: { id: string } }): Promise<React.ReactNode> {
   const { id } = await params
@@ -10,10 +11,12 @@ async function CreaturePage ({ params }: { params: { id: string } }): Promise<Re
   }
 
   return (
-    <div>
-      <h1>Creature Page</h1>
-      <p>Creature ID: {id}</p>
-    </div>
+    <AppLayout>
+      <div>
+        <h1>Creature Page</h1>
+        <p>Creature ID: {id}</p>
+      </div>
+    </AppLayout>
   )
 }
 

@@ -76,6 +76,9 @@ function DashboardContent ({ session }: { session: Session }): React.ReactNode {
               <Button variant='primary' onClick={handleCreateMonster}>
                 ✨ Créer une créature
               </Button>
+              <Button variant='outline' onClick={() => { window.location.href = '/wallet' }}>
+                🪙 Mon Wallet
+              </Button>
               <Button variant='outline' onClick={handleLogout}>
                 Se déconnecter
               </Button>
