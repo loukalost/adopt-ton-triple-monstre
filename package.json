@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run copy-docs && next build --turbopack",
+    "build": "npm run docs:build && npm run copy-docs && next build --turbopack",
     "start": "next start",
     "lint": "ts-standard --fix",
     "copy-docs": "node scripts/copy-docs.mjs",
-    "docs:build": "cd documentation && npm run build",
+    "docs:build": "cd documentation && npm install && npm run build",
     "docs:dev": "cd documentation && npm run start"
   },
   "dependencies": {
