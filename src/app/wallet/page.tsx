@@ -5,6 +5,10 @@ import { getAuthInstance } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+// Force la revalidation de la page à chaque requête pour afficher le solde à jour
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 /**
  * Page dédiée au Wallet (Portefeuille de Koins)
  *

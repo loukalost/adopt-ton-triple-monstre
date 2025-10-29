@@ -20,3 +20,16 @@ export type {
   MonsterFormProps,
   MonsterFormValues
 } from './forms/monster-form'
+
+// Shop types
+export type {
+  AccessoryCategory,
+  AccessoryRarity,
+  ShopAccessory,
+  ShopBackground,
+  EquippedAccessories,
+  MonsterEquipment,
+  InventoryItem,
+  UserInventory,
+  DBInventory
+} from './shop'

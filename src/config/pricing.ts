@@ -12,23 +12,19 @@ export interface PricingEntry {
 
 export const pricingTable: Record<number, PricingEntry> = {
   10: {
-    productId: 'prod_TJrIjoHwTKwg9c',
+    productId: 'prod_TJrIJITcL4IHs3',
     price: 5 // 5€ pour 10 Koins
   },
   50: {
-    productId: 'prod_TJrJHiNKtOkEXR',
+    productId: 'prod_TJrJcuzsBuRDse',
     price: 20 // 20€ pour 50 Koins
   },
   500: {
-    productId: 'prod_TJrJT9hFwWozod',
+    productId: 'prod_TJrJvU3OyU8HoJ',
     price: 150 // 150€ pour 500 Koins
   },
   1000: {
-    productId: 'prod_TJrKh3jSiA5EQ5',
+    productId: 'prod_TJrK272JmJ5tGA',
     price: 200 // 200€ pour 1000 Koins
-  },
-  5000: {
-    productId: 'prod_TJrLUfvqFCZx8l',
-    price: 800 // 800€ pour 5000 Koins
   }
 }

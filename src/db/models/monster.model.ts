@@ -1,5 +1,14 @@
 import mongoose, { type Document } from 'mongoose'
 
+/**
+ * Sous-schéma pour les accessoires équipés
+ */
+interface EquippedAccessoriesSchema {
+  hat?: string
+  glasses?: string
+  shoes?: string
+}
+
 export interface DBMonster extends Document {
   name: string
   level: number
@@ -7,6 +16,8 @@ export interface DBMonster extends Document {
   traits: string // JSON string of MonsterTraits
   state: 'happy' | 'sad' | 'angry' | 'hungry' | 'sleepy'
   ownerId: string
+  equipment?: EquippedAccessoriesSchema // Accessoires équipés
+  background?: string // ID de l'arrière-plan équipé
   createdAt: Date
   updatedAt: Date
 }
@@ -45,6 +56,19 @@ const monsterSchema = new Schema<DBMonster>({
     type: String,
     required: [true, 'Owner ID is required'],
     index: true
+  },
+  equipment: {
+    type: {
+      hat: { type: String, required: false },
+      glasses: { type: String, required: false },
+      shoes: { type: String, required: false }
+    },
+    required: false,
+    default: {}
+  },
+  background: {
+    type: String,
+    required: false
   }
 }, {
   timestamps: true,
