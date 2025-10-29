@@ -3,8 +3,7 @@
 import type { ReactElement } from 'react'
 import { useConfetti } from '@/hooks/wallet/useConfetti'
 import { Modal } from './modal/modal'
-import { SuccessModalContent } from './modal/success-modal-content'
-import { ErrorModalContent } from './modal/error-modal-content'
+import { SuccessModalContent, ErrorModalContent } from './modal'
 
 interface PaymentModalProps {
   type: 'success' | 'error'
@@ -12,7 +11,7 @@ interface PaymentModalProps {
 }
 
 /**
- * Modal fun et engageante pour afficher les résultats de paiement - Thème SLATE
+ * Modal fun et engageante pour afficher les résultats de paiement
  * Refactorisé selon les principes SOLID
  *
  * Principe SRP: Responsabilité unique de coordination du modal

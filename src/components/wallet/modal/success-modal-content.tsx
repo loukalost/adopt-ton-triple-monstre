@@ -6,28 +6,31 @@ interface SuccessModalContentProps {
 }
 
 /**
- * Composant contenu du modal de succès - Thème SLATE
+ * Composant contenu du modal de succès
  * Principe SRP: Responsabilité unique d'affichage du contenu de succès
- *
- * Couleurs adaptées au thème SLATE:
- * - Bordure: slate-700 to slate-900 (professionnel)
- * - Fond: white to slate-50 (léger)
- * - Bouton: emerald (vert = succès universel)
  */
 export function SuccessModalContent ({ onClose }: SuccessModalContentProps): React.ReactElement {
   return (
-    <div className='relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 p-1 shadow-[0_30px_90px_rgba(0,0,0,0.4)]'>
+    <div className='relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-green-400 via-emerald-400 to-teal-500 p-1 shadow-[0_30px_90px_rgba(0,0,0,0.4)]'>
       {/* Animations de fond */}
-      <div className='absolute inset-0 animate-pulse-slow'>
-        <div className='absolute top-0 left-0 w-full h-full bg-gradient-to-br from-slate-500/30 via-slate-600/30 to-slate-700/30' />
+      <div className='absolute inset-0 animate-pulse-slow pointer-events-none'>
+        <div className='absolute top-0 left-0 w-full h-full bg-gradient-to-br from-yellow-300/30 via-green-300/30 to-emerald-300/30' />
       </div>
 
       {/* Contenu */}
-      <div className='relative bg-gradient-to-br from-white via-slate-50 to-slate-100 rounded-[2.8rem] p-12'>
+      <div className='relative bg-gradient-to-br from-white via-green-50 to-emerald-100 rounded-[2.8rem] p-12'>
+        {/* Bouton de fermeture X */}
+        <button
+          onClick={onClose}
+          className='absolute top-6 right-6 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 text-white font-bold text-2xl transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg'
+          aria-label='Fermer'
+        >
+          ✕
+        </button>
         {/* Étoiles décoratives */}
-        <div className='absolute top-8 left-8 text-6xl animate-twinkle-star'>⭐</div>
-        <div className='absolute top-12 right-12 text-5xl animate-twinkle-star [animation-delay:0.3s]'>✨</div>
-        <div className='absolute bottom-12 left-16 text-5xl animate-twinkle-star [animation-delay:0.6s]'>💫</div>
+        <div className='absolute top-8 left-8 text-6xl animate-twinkle-star pointer-events-none'>⭐</div>
+        <div className='absolute top-12 right-12 text-5xl animate-twinkle-star [animation-delay:0.3s] pointer-events-none'>✨</div>
+        <div className='absolute bottom-12 left-16 text-5xl animate-twinkle-star [animation-delay:0.6s] pointer-events-none'>💫</div>
 
         {/* Emoji principal animé */}
         <div className='text-center mb-8'>
@@ -38,29 +41,29 @@ export function SuccessModalContent ({ onClose }: SuccessModalContentProps): Rea
           </div>
         </div>
 
-        {/* Titre - Gradient SLATE */}
-        <h2 className='text-6xl font-black text-center mb-4 text-transparent bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 bg-clip-text drop-shadow-lg'>
+        {/* Titre */}
+        <h2 className='text-6xl font-black text-center mb-4 text-transparent bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text drop-shadow-lg'>
           Succès !
         </h2>
 
         {/* Message */}
-        <p className='text-3xl font-bold text-center text-slate-700 mb-8'>
+        <p className='text-3xl font-bold text-center text-green-700 mb-8'>
           Tes Koins ont été ajoutés ! 🪙✨
         </p>
 
         {/* Détails fun */}
-        <div className='bg-gradient-to-r from-slate-50 to-slate-100 rounded-3xl p-6 mb-8 border-4 border-slate-300 shadow-xl'>
-          <div className='flex items-center justify-center gap-4 text-2xl font-bold text-slate-800'>
+        <div className='bg-gradient-to-r from-yellow-100 to-green-100 rounded-3xl p-6 mb-8 border-4 border-green-300 shadow-xl'>
+          <div className='flex items-center justify-center gap-4 text-2xl font-bold text-green-800'>
             <span className='text-4xl animate-spin-slow'>💰</span>
             <span>Ton trésor s'agrandit !</span>
             <span className='text-4xl animate-spin-slow [animation-delay:1s]'>🎊</span>
           </div>
         </div>
 
-        {/* Bouton de fermeture - Emerald (succès) */}
+        {/* Bouton de fermeture */}
         <GradientButton
           onClick={onClose}
-          gradient='from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700'
+          gradient='from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700'
           className='text-2xl py-6 px-8 rounded-3xl'
         >
           <span className='text-3xl'>🎮</span>

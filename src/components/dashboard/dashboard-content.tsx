@@ -6,6 +6,7 @@ import MonsterModal from './monster-modal'
 import MonsterForm from '../forms/monster-form'
 import { authToasts } from '@/lib/toast'
 import { MonstersList } from '@/components/monsters'
+import { MonstersAutoUpdater } from '@/components/monsters/auto-updater'
 import { getMonsters } from '@/actions/monsters.actions'
 import type { DBMonster } from '@/db/models/monster.model'
 
@@ -59,6 +60,16 @@ function DashboardContent ({ session }: { session: Session }): React.ReactNode {
 
   return (
     <div className='flex min-h-screen flex-col bg-slate-50 py-8 px-4 sm:px-6 lg:px-8'>
+      {/* Composant auto-update des monstres (invisible) */}
+      <MonstersAutoUpdater
+        userId={session.user.id}
+        minInterval={60000}
+        maxInterval={180000}
+        enabled
+        verbose
+        showIndicator={false}
+      />
+
       <div className='mx-auto w-full max-w-7xl'>
         {/* Header section avec titre et actions */}
         <header className='mb-10 space-y-4'>
